@@ -1,0 +1,42 @@
+:root{
+--res: 300px;
+}
+.radioButton {
+  float: left;
+  margin: 0 5px 0 0;
+  width: calc(var(--res)/3.5);
+  height: calc(var(--res)/5); 
+  position: relative;
+}
+
+.radioButton label,
+.radioButton input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+border: 1px solid red;
+text-align: center;
+vertical-align: middle;
+font-size: 20px;
+}
+
+.radioButton input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+}
+
+.radioButton input[type="radio"]:checked + label {
+  background: #20b8be;
+  border-radius: 4px;
+}
+
+.radioButton label {
+  cursor: pointer;
+  z-index: 90;
+  line-height: 1.8em;
+}

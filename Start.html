@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="radio.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="startMenu start">
+        <div class="header start">
+            <div>Schulte table</div>
+            <div>Rozmiar planszy</div>
+        </div>
+        <div class="content start">
+            <div class="radioButton button">
+                <input type="radio" id="three" name="board-size" value="9" checked onclick="checkedValue()">
+                <label for="three">3x3</label>
+            </div>
+            <div class="radioButton button">
+                <input type="radio" id="four" name="board-size" value="16" onclick="checkedValue()">
+                <label for="four">4x4</label>
+            </div>
+            <div class="radioButton button">
+                <input type="radio" id="five" name="board-size" value="25" onclick="checkedValue()">
+                <label for="five">5x5</label>
+            </div>
+        </div>
+        <div>
+            <div class="start button">
+                <button onclick="createDivs()">Start</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="board"></div> -->
+    <script src="main.js"></script>
+</body>
+
+</html>
