@@ -8,7 +8,7 @@
 }
 
 :root{
---res: 300px;
+--res: 800px;
 }
 .startMenu{
   border-right: 1px solid red;

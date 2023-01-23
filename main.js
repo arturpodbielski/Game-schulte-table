@@ -33,7 +33,7 @@ function showDivContent(event) {
         var endTime = Date.now();
         var finalTime = (endTime - startTime) / 1000;
         console.log("Final time: " + finalTime + " seconds");
-        
+
         document.querySelector('#board').style.filter = 'blur(2px)';
         var resultCreate = document.createElement("div");
         resultCreate.setAttribute("id","result");
@@ -97,3 +97,37 @@ newDiv.addEventListener("click", showDivContent);
 board.appendChild(newDiv);
 }
 }
+
+const {app, BrowserWindow,ipcMain} = require('electron')
+  const path = require('path')
+  const url = require('url')
+  
+  function createWindow () {
+    // Create the browser window.
+    win = new BrowserWindow({width: 800, height: 800})
+
+
+win.webContents.on('did-finish-load', () => {
+  win.webContents.executeJavaScript(`
+    let el = document.querySelector('.startMenu');
+    let width = el.offsetWidth;
+    let height = el.offsetHeight;
+    let size = { width: width, height: height };
+    require('electron').ipcRenderer.send('set-window-size', size);
+  `);
+});
+
+
+ipcMain.on('set-window-size', (event, size) => {
+  win.setSize(size.width, size.height);
+});
+
+    // and load the index.html of the app.
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'Start.html'),
+      protocol: 'file:',
+      slashes: true
+    }))
+  }
+  
+  app.on('ready', createWindow)
