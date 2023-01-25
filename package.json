@@ -1,1 +1,6 @@
-{"name":"gra-schulte-table","version":"0.1.0","main":"main.js","scripts":{"start":"electron ."},"devDependencies":{"electron":"^22.0.3"}}
+{"name":"gra-schulte-table",
+"version":"0.1.0",
+"main":"main.js",
+"scripts":{"start":"electron ."},
+"devDependencies":{"electron":"^22.0.3",
+"electron-packager":"^17.1.1"}}

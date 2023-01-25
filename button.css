@@ -1,4 +1,4 @@
-button {
+button  {
   align-items: center;
   appearance: none;
   background-clip: padding-box;
@@ -7,7 +7,6 @@ button {
   border-style: none;
   box-sizing: border-box;
   color: #fff;
-  cursor: pointer;
   display: inline-block;
   flex-direction: row;
   flex-shrink: 0;
@@ -35,11 +34,7 @@ button {
   z-index: 0;
 }
 
-@media (min-width: 768px) {
-  button {
-    padding: 19px 32px;
-  }
-}
+
 
 button:before,
 button:after {
@@ -47,7 +42,7 @@ button:after {
 }
 
 button:before {
-  background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  background-image: linear-gradient(92.83deg, #494644 0, #f1eae9 100%);
   content: "";
   display: block;
   height: 100%;
@@ -61,7 +56,7 @@ button:before {
 
 button:after {
   background-color: initial;
-  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  background-image: linear-gradient(#b9b2b1 0, #010505 100%);
   bottom: 4px;
   content: "";
   display: block;
@@ -75,7 +70,7 @@ button:after {
 }
 
 button:hover:not(:disabled):before {
-  background: linear-gradient(92.83deg, rgb(255, 116, 38) 0%, rgb(249, 58, 19) 100%);
+  background: linear-gradient(92.83deg, rgb(87, 87, 87) 0%, rgb(17, 14, 14) 100%);
 }
 
 button:hover:not(:disabled):after {
@@ -92,11 +87,11 @@ button:active:not(:disabled) {
 }
 
 button:active:not(:disabled):before {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  background-image: linear-gradient(0deg, rgba(73, 70, 70, 0.2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #3a3837 0, #ccbdba 100%);
 }
 
 button:active:not(:disabled):after {
-  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  background-image: linear-gradient(#867e7c 0, #363a3a 100%);
   bottom: 4px;
   left: 4px;
   right: 4px;
@@ -104,6 +99,5 @@ button:active:not(:disabled):after {
 }
 
 button:disabled {
-  cursor: default;
   opacity: .24;
 }

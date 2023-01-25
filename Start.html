@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="button.css">
     <link rel="stylesheet" href="radio.css">
+    <link rel="stylesheet" href="menu.css">
     <title>Document</title>
 </head>
 
 <body>
     <div class="startMenu start">
-        <div class="header start">
-            <div>Schulte table</div>
-            <div>Rozmiar planszy</div>
+        <div class="component header start">
+            <div>SCHULTE TABLE</div>
         </div>
-        <div class="content start">
+        <div class="component start">
             <div class="radioButton button">
                 <input type="radio" id="three" name="board-size" value="9" checked onclick="checkedValue()">
                 <label for="three">3x3</label>
@@ -31,11 +31,19 @@
                 <label for="five">5x5</label>
             </div>
         </div>
-        <div>
-            <div class="start button">
-                <button onclick="createDivs()">Start</button>
+        <div class="component start">
+            <div class="mid">
+                <span class="best3">3X3 Best time: </span>
+                <span class="best4">4X4 Best time: </span>
+                <span class="best5">5X5 Best time: </span>
+            </div>
+            <div class="mid">
+                <div class="start button">
+                    <button onclick="createDivs()">Start</button>
+                </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- <div id="board"></div> -->
     <script src="main.js"></script>

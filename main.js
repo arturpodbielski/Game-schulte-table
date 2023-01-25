@@ -1,6 +1,22 @@
-var currentNumber = 1;
-var startTime;
-var divCount;
+// const fs = require('fs');
+let currentNumber = 1;
+let startTime;
+let divCount;
+let allClick;
+let correctClick;
+let done = false;
+let best3 = 999;
+let best4 = 999;
+let best5 = 999;
+// let cursor = new Image();
+// cursor.src = "/kursor.png";
+// cursor.addEventListener("load", function() {
+//   document.body.style.cursor = `url(${cursor.src}), auto`;
+// });
+// cursor.addEventListener("error", function() {
+//   console.error("Could not load cursor image");
+//   document.body.style.cursor = "crosshair";
+// });
 
 function checkedValue(){
   divCount = parseInt(document.querySelector('input[name="board-size"]:checked').value);
@@ -17,37 +33,112 @@ function restart(){
     element.remove();
   });
   currentNumber = 1;
+  done = false;
   createDivs();
 }
+function blinkWrong(element) {
+    element.style.backgroundColor = "red";
+    setTimeout(function(){
+        element.style.backgroundColor = "";
+    }, 100);
+}
+
+function calculateElapsedTime(start,end) {
+    let elapsedTime;
+    return function() {
+        elapsedTime = end - start;
+        return elapsedTime;
+    }
+}
+
+let getElapsedTime = calculateElapsedTime();
 
 function showDivContent(event) {
-    var clickedNumber = parseInt(event.target.innerHTML);
-    if (clickedNumber === currentNumber) {
+    let clickedNumber = parseInt(event.target.innerHTML);
+    let beforeClick = Date.now();
+    if (clickedNumber === currentNumber && currentNumber <= divCount) {
         event.target.classList.add("correct");
+//         event.target.style.cursor = "url('/kursorc.png'), auto";
+// setTimeout(function(){
+//    event.target.style.cursor = "auto";
+// }, 300);
         currentNumber++;
-    }else {
-        event.target.style.backgroundColor = "red";
+        allClick++;
+        correctClick++;
+        let afterClick = Date.now();
+        elapsedTime = getElapsedTime(beforeClick,afterClick);
+        console.log(elapsedTime);
+  }
+    else if(currentNumber <= divCount){
+        blinkWrong(event.target);
+        allClick++;
+//                 event.target.style.cursor = "url('/kursorw.png'), auto";
+// setTimeout(function(){
+//    event.target.style.cursor = "auto";
+// }, 300);
     }
+    // console.log("Elapsed time: " + elapsedTime + " milliseconds");
+    if (currentNumber > divCount && !done) {
+        done = true;
+        let compare;
+        let endTime = Date.now();
 
-    if (currentNumber > divCount) {
-        var endTime = Date.now();
-        var finalTime = (endTime - startTime) / 1000;
-        console.log("Final time: " + finalTime + " seconds");
+        let finalTime = (endTime - startTime) / 1000;
+        compare = finalTime
 
+        // const data = {
+        //   finalTime: finalTime
+        // };
+        // const jsonData = JSON.stringify(data);
+        // fs.writeFile('finalTime.json', jsonData, (err) => {
+        //   if (err) throw err;
+        //   console.log('Dane zapisane do pliku');
+        // });
+
+
+
+        console.log(divCount)
+        if(divCount == 9 && compare < best3){
+          best3 = compare.toFixed(2)
+          document.querySelector('.best3').innerHTML = '3X3 Best time: ' + best3 +"s";
+        }
+        else if(divCount == 16 && compare < best4){
+          best4 = compare.toFixed(2)
+          document.querySelector('.best4').innerHTML = '4X4 Best time: ' + best4 +"s";
+        }
+        else if(divCount == 25 && compare < best5){
+          best5 = compare.toFixed(2)
+          document.querySelector('.best5').innerHTML = '5X5 Best time: ' + best5 +"s";
+        }
+        
+        
+        // console.log("Final time: " + finalTime + " seconds");
+        // console.log("Accuracy: " + (correctClick/allClick)*100 + " %");
         document.querySelector('#board').style.filter = 'blur(2px)';
-        var resultCreate = document.createElement("div");
+
+        let resultCreate = document.createElement("div");
         resultCreate.setAttribute("id","result");
         document.body.appendChild(resultCreate);
-        var newButton = document.createElement("button");
+
+        let newButton = document.createElement("button");
         resultCreate.appendChild(newButton);
         newButton.setAttribute("id","restart");
         newButton.textContent = ("Restart");
         newButton.addEventListener("click", restart);
-        var newButton2 = document.createElement("button");
+
+        let newButton2 = document.createElement("button");
         resultCreate.appendChild(newButton2);
         newButton2.setAttribute("id","Menu");
         newButton2.textContent = ("Menu");
         newButton2.addEventListener("click", createMenu);
+
+        let spanTime = document.createElement("span");
+        resultCreate.appendChild(spanTime);
+        spanTime.innerHTML = "Final time: " + finalTime + " seconds";
+
+        let spanAccuracy = document.createElement("span");
+        resultCreate.appendChild(spanAccuracy);
+        spanAccuracy.innerHTML = "Accuracy: " + ((correctClick/allClick)*100).toFixed(2) + " %";
     }
 }
 
@@ -65,25 +156,29 @@ function createMenu(){
 }
 
 function createDivs() {
+  done = false;
   checkedValue();
   startTime = Date.now();
-  var boardCreate = document.createElement("div");
+  elapsedTime = Date.now();
+  allClick = 0;
+  correctClick = 0;
+  let boardCreate = document.createElement("div");
   boardCreate.setAttribute("id","board");
   boardCreate.setAttribute("class","boardStyle");
   document.body.appendChild(boardCreate);
   document.querySelectorAll(".start").forEach(function(element) {
     element.classList.add("invisible");
   });
-  var arr = Array.apply(null, Array(divCount)).map(function (y, i) { return i+1; });
+  let arr = Array.apply(null, Array(divCount)).map(function (y, i) { return i+1; });
   arr = arr.sort(function () {
     return Math.random() - 0.5;
   });
   arr = arr.sort(function (){
 return Math.random() - 0.5;
 });
-var board = document.getElementById("board");
-for (var i = 0; i < divCount; i++) {
-var newDiv = document.createElement("div");
+let board = document.getElementById("board");
+for (let i = 0; i < divCount; i++) {
+let newDiv = document.createElement("div");
 newDiv.textContent = (arr[i]);
 newDiv.classList.add("new-div");
 if (divCount == 9) {
@@ -98,15 +193,17 @@ board.appendChild(newDiv);
 }
 }
 
-const {app, BrowserWindow,ipcMain} = require('electron')
+const {app, BrowserWindow,ipcMain} = require('electron');
+const { after } = require('node:test');
   const path = require('path')
   const url = require('url')
   
   function createWindow () {
     // Create the browser window.
-    win = new BrowserWindow({width: 800, height: 800})
-
-
+    win = new BrowserWindow({width: 950, height: 950 })
+    win.setResizable(false)
+    win.setAutoHideMenuBar(true)
+    win.setTitle("Schulte table")
 win.webContents.on('did-finish-load', () => {
   win.webContents.executeJavaScript(`
     let el = document.querySelector('.startMenu');

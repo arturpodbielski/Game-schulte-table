@@ -3,31 +3,24 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto',
-        sans-serif;
-        cursor: pointer;
+    sans-serif;
+    user-select: none;
+    font-size: 80px;
+    cursor: crosshair;
+    /* cursor: url(/kursor.png), auto; */
 }
 
 :root{
 --res: 800px;
-}
-.startMenu{
-  border-right: 1px solid red;
-  border-bottom: 1px solid red;
-  width: var(--res);
-  height: var(--res); 
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: rows;
-  background-color: aqua;
-}
-.startMenu > *{
-  display: flex;
-  height: var(--res/3);
-  justify-content: center;
-  align-items: center;
+--black:black;
+--white:white;
 }
 
 .boardStyle {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
   border-right: 1px solid red;
   border-bottom: 1px solid red;
   width: var(--res);
@@ -44,9 +37,12 @@
     border: 1px solid red;
     text-align: center;
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 60px;
   /* width: 33.33%;
   height: 33.33%; */
+}
+.new-div:hover {
+  border: 2px solid red;
 }
 .three{
   width: calc(100%/ 3);
@@ -75,9 +71,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000;
+  background: rgb(21, 187, 63);
   animation: fill-from-center 0.3s linear;
   opacity: 1;
+}
+correct
+.correct:hover {
+  border: 1px solid red;
 }
 
 .invisible{
@@ -99,22 +99,27 @@
   }
 }
 
-    #result {
-        position: relative;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.5);
-        padding: 15px;
-        text-align: center;
-    }
+#result {
+    width: var(--res);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    text-align: center;
+}
+
+#result > restart {
+    background: #000;
+    color: #fff;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+}
     
-    #result > restart {
-        background: #000;
-        color: #fff;
-        padding: 5px;
-        font-size: 16px;
-        border: none;
-        margin-top: 10px;
-    }
-    
+span{
+  display: block;
+  font-size: 30px;
+}
