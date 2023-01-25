@@ -1,4 +1,3 @@
-// const fs = require('fs');
 let currentNumber = 1;
 let startTime;
 let divCount;
@@ -8,15 +7,6 @@ let done = false;
 let best3 = 999;
 let best4 = 999;
 let best5 = 999;
-// let cursor = new Image();
-// cursor.src = "/kursor.png";
-// cursor.addEventListener("load", function() {
-//   document.body.style.cursor = `url(${cursor.src}), auto`;
-// });
-// cursor.addEventListener("error", function() {
-//   console.error("Could not load cursor image");
-//   document.body.style.cursor = "crosshair";
-// });
 
 function checkedValue(){
   divCount = parseInt(document.querySelector('input[name="board-size"]:checked').value);
@@ -58,26 +48,20 @@ function showDivContent(event) {
     let beforeClick = Date.now();
     if (clickedNumber === currentNumber && currentNumber <= divCount) {
         event.target.classList.add("correct");
-//         event.target.style.cursor = "url('/kursorc.png'), auto";
-// setTimeout(function(){
-//    event.target.style.cursor = "auto";
-// }, 300);
+
         currentNumber++;
         allClick++;
         correctClick++;
         let afterClick = Date.now();
         elapsedTime = getElapsedTime(beforeClick,afterClick);
-        console.log(elapsedTime);
+
   }
     else if(currentNumber <= divCount){
         blinkWrong(event.target);
         allClick++;
-//                 event.target.style.cursor = "url('/kursorw.png'), auto";
-// setTimeout(function(){
-//    event.target.style.cursor = "auto";
-// }, 300);
+
     }
-    // console.log("Elapsed time: " + elapsedTime + " milliseconds");
+
     if (currentNumber > divCount && !done) {
         done = true;
         let compare;
@@ -86,18 +70,6 @@ function showDivContent(event) {
         let finalTime = (endTime - startTime) / 1000;
         compare = finalTime
 
-        // const data = {
-        //   finalTime: finalTime
-        // };
-        // const jsonData = JSON.stringify(data);
-        // fs.writeFile('finalTime.json', jsonData, (err) => {
-        //   if (err) throw err;
-        //   console.log('Dane zapisane do pliku');
-        // });
-
-
-
-        console.log(divCount)
         if(divCount == 9 && compare < best3){
           best3 = compare.toFixed(2)
           document.querySelector('.best3').innerHTML = '3X3 Best time: ' + best3 +"s";
@@ -111,9 +83,6 @@ function showDivContent(event) {
           document.querySelector('.best5').innerHTML = '5X5 Best time: ' + best5 +"s";
         }
         
-        
-        // console.log("Final time: " + finalTime + " seconds");
-        // console.log("Accuracy: " + (correctClick/allClick)*100 + " %");
         document.querySelector('#board').style.filter = 'blur(2px)';
 
         let resultCreate = document.createElement("div");
@@ -199,7 +168,7 @@ const { after } = require('node:test');
   const url = require('url')
   
   function createWindow () {
-    // Create the browser window.
+
     win = new BrowserWindow({width: 950, height: 950 })
     win.setResizable(false)
     win.setAutoHideMenuBar(true)
@@ -219,7 +188,6 @@ ipcMain.on('set-window-size', (event, size) => {
   win.setSize(size.width, size.height);
 });
 
-    // and load the index.html of the app.
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'Start.html'),
       protocol: 'file:',

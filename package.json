@@ -1,6 +1,18 @@
-{"name":"gra-schulte-table",
-"version":"0.1.0",
-"main":"main.js",
-"scripts":{"start":"electron ."},
-"devDependencies":{"electron":"^22.0.3",
-"electron-packager":"^17.1.1"}}
+{"name":"gra-schulte-table","version":"0.1.0","main":"main.js",
+"scripts":{"start":"electron .",
+"build-installer": "electron-builder"
+},
+  "appId": "Schulte Table",
+  "win": {
+    "target": ["nsis"],
+    "icon": "/icon.ico",
+    "requestedExecutionLevel": "requireAdministrator"
+  },
+  "nsis": {
+    "installerIcon": "src/icon.ico",
+    "uninstallerIcon": "src/icon.ico",
+    "uninstallDisplayName": "Schulte Table",
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+"devDependencies":{"electron":"^22.0.3","electron-packager":"^17.1.1","electron-builder":"^23.6.0"},"dependencies":{"create-electron-app":"^6.0.4"}}
