@@ -39,3 +39,26 @@
 .header{
     font-size:50px;
 }
+.sidebar{
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 24%;
+  top: 200px;
+  z-index: 1000;
+  width: 800px;
+  height: 400px;
+  border: 3px #000 solid;
+  line-height: 100%;
+  padding-top: 10%;
+  padding-left: 10%;
+}
+.best3{
+  font-size: 26px;
+}
+.best4{
+  font-size: 26px;
+}
+.best5{
+  font-size: 26px;
+}
