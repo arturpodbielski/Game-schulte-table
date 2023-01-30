@@ -5,7 +5,7 @@ Gra polega na odnajdywaniu w tablicy liczb lub liter w kolejności rosnącej lub
 
 ## Implementacja
 
-Gra została napisana w języku Javascript, aby stworzyć instalator skorzystałem z biblioteki Electronjs. Gra posiada opcję wyboru tabeli składającej się 9, 16 lub 25 liczb. Po wykonaniu zadania gracz dostaje informację o uzyskanym czasie i dokładności klikania kolejnych elementów.
+Gra została napisana w języku Javascript, aby stworzyć instalator skorzystałem z frameworka Electronjs. Gra posiada opcję wyboru tabeli składającej się 9, 16 lub 25 liczb. Po wykonaniu zadania gracz dostaje informację o uzyskanym czasie i dokładności klikania kolejnych elementów.
 
 ## Uruchomienie
 npm install
