@@ -1,10 +1,13 @@
 let currentNumber = 1;
+let currentLetter = 'A';
 let startTime;
 let divCount;
 let allClick;
 let correctClick;
 let done = false;
 let rec = false;
+let type = 1;
+const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 // let best3;
 // let best4;
 // let best5;
@@ -33,6 +36,7 @@ if (localStorage.getItem("best") === null) {
   function checkedValue(){
   divCount = parseInt(document.querySelector('input[name="board-size"]:checked').value);
 }
+
 function resetRecords(){
           const best = {
             best3: "999",
