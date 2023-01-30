@@ -51,6 +51,7 @@ function showOptions(){
   });
     document.querySelectorAll(".start").forEach(function(element) {
     element.style.filter = 'blur(2px)';
+    element.style.pointerEvents = "none";
   });
 }
 

@@ -40,11 +40,11 @@
     font-size:50px;
 }
 .sidebar{
-  background-color: #fff;
   position: fixed;
-  top: 50%;
-  left: 24%;
-  top: 200px;
+  width: var(--res);
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1000;
   width: 800px;
   height: 400px;
@@ -52,6 +52,7 @@
   line-height: 100%;
   padding-top: 10%;
   padding-left: 10%;
+  background-color: rgb(219, 218, 218);
 }
 .best3{
   font-size: 26px;
