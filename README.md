@@ -1,6 +1,6 @@
 # Schulte Table
 
-Gra polega na odnajdywaniu w tablicy liczb lub liter w kolejności rosnącej lub malejącej. Celem gry jest poprawa szybkości i precyzji czytania, ponieważ użytkownik musi szybko przeszukiwać tablicę i znajdować odpowiednie liczby lub litery. To ćwiczenie pomaga również poprawić zdolność skupienia i koncentracji, co jest ważne podczas czytania.
+Gra polega na odnajdywaniu w tablicy liczb lub liter w kolejności rosnącej lub malejącej. Celem gry jest poprawa szybkości i precyzji czytania, ponieważ użytkownik musi szybko przeszukiwać tablicę i znajdować odpowiednie liczby lub litery. To ćwiczenie pomaga również poprawić zdolność skupienia i koncentracji, co jest ważne podczas szybkiego czytania.
 
 
 ## Implementacja
