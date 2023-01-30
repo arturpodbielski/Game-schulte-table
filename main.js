@@ -4,12 +4,54 @@ let divCount;
 let allClick;
 let correctClick;
 let done = false;
-let best3 = 999;
-let best4 = 999;
-let best5 = 999;
+let rec = false;
+// let best3;
+// let best4;
+// let best5;
+if (localStorage.getItem("best") === null) {
+          const best = {
+            best3: "999",
+            best4: "999",
+            best5: "999"
+        }
+        localStorage.setItem("best", JSON.stringify(best));
+        // best3 = parseFloat(best.best3);
+        // best4 = parseFloat(best.best4);
+        // best5 = parseFloat(best.best5);
+} else {
+    best = JSON.parse(localStorage.getItem("best"));
+    // best3 = parseFloat(best.best3);
+    // best4 = parseFloat(best.best3);
+    // best5 = parseFloat(best.best3);
+}
 
-function checkedValue(){
+  document.querySelector('.best3').innerHTML = '3X3 Best time: ' + parseFloat(best.best3) +"s";
+  document.querySelector('.best4').innerHTML = '4X4 Best time: ' + parseFloat(best.best4) +"s";
+  document.querySelector('.best5').innerHTML = '5X5 Best time: ' + parseFloat(best.best5) +"s";
+
+
+  function checkedValue(){
   divCount = parseInt(document.querySelector('input[name="board-size"]:checked').value);
+}
+function resetRecords(){
+          const best = {
+            best3: "999",
+            best4: "999",
+            best5: "999"
+        }
+  localStorage.removeItem(best)
+  document.querySelector('.best3').innerHTML = '3X3 Best time: ' + parseFloat(best.best3) +"s";
+  document.querySelector('.best4').innerHTML = '4X4 Best time: ' + parseFloat(best.best4) +"s";
+  document.querySelector('.best5').innerHTML = '5X5 Best time: ' + parseFloat(best.best5) +"s";
+  localStorage.setItem("best", JSON.stringify(best));
+}
+function showOptions(){
+  document.querySelectorAll(".sidebar").forEach(function(element) {
+    element.classList.remove("invisible");
+  });
+    document.querySelectorAll(".start").forEach(function(element) {
+    element.style.filter = 'blur(2px)';
+  });
 }
 
 function restart(){
@@ -25,6 +67,7 @@ function restart(){
   currentNumber = 1;
   done = false;
   createDivs();
+  rec = false;
 }
 function blinkWrong(element) {
     element.style.backgroundColor = "red";
@@ -45,16 +88,11 @@ let getElapsedTime = calculateElapsedTime();
 
 function showDivContent(event) {
     let clickedNumber = parseInt(event.target.innerHTML);
-    let beforeClick = Date.now();
     if (clickedNumber === currentNumber && currentNumber <= divCount) {
         event.target.classList.add("correct");
-
         currentNumber++;
         allClick++;
         correctClick++;
-        let afterClick = Date.now();
-        elapsedTime = getElapsedTime(beforeClick,afterClick);
-
   }
     else if(currentNumber <= divCount){
         blinkWrong(event.target);
@@ -66,26 +104,40 @@ function showDivContent(event) {
         done = true;
         let compare;
         let endTime = Date.now();
+        let spanTime = document.createElement("span");
 
-        let finalTime = (endTime - startTime) / 1000;
-        compare = finalTime
-
-        if(divCount == 9 && compare < best3){
-          best3 = compare.toFixed(2)
-          document.querySelector('.best3').innerHTML = '3X3 Best time: ' + best3 +"s";
-        }
-        else if(divCount == 16 && compare < best4){
-          best4 = compare.toFixed(2)
-          document.querySelector('.best4').innerHTML = '4X4 Best time: ' + best4 +"s";
-        }
-        else if(divCount == 25 && compare < best5){
-          best5 = compare.toFixed(2)
-          document.querySelector('.best5').innerHTML = '5X5 Best time: ' + best5 +"s";
-        }
+        spanTime.classList.add("spanr");
         
+        let resultCreate = document.createElement("div");
+        let finalTime = (endTime - startTime) / 1000;
+        compare = finalTime;
+        if(divCount == 9 && compare < parseFloat(best.best3)){
+          // localStorage.setItem("best3", compare.toFixed(2));
+          best.best3 = compare.toFixed(2);
+          localStorage.setItem("best", JSON.stringify(best));
+          document.querySelector('.best3').innerHTML = '3X3 Best time: ' + compare.toFixed(2) +"s";
+          rec = true;
+        }
+        else if(divCount == 16 && compare < parseFloat(best.best4)){
+          best.best4 = compare.toFixed(2);
+          localStorage.setItem("best", JSON.stringify(best));
+          document.querySelector('.best4').innerHTML = '4X4 Best time: ' + compare.toFixed(2) +"s";
+          rec = true;
+        }
+        else if(divCount == 25 && compare < parseFloat(best.best5)){
+          best.best5 = compare.toFixed(2);
+          localStorage.setItem("best", JSON.stringify(best));
+          document.querySelector('.best5').innerHTML = '5X5 Best time: ' + compare.toFixed(2) +"s";
+          rec = true;
+        }
+        let spanAccuracy = document.createElement("span");
+        spanAccuracy.style.fontSize = "26px";
+        spanAccuracy.style.display = "block";
+        resultCreate.appendChild(spanTime);
+        resultCreate.appendChild(spanAccuracy);
+        spanAccuracy.innerHTML = "Accuracy: " + ((correctClick/allClick)*100).toFixed(2) + " %";
         document.querySelector('#board').style.filter = 'blur(2px)';
 
-        let resultCreate = document.createElement("div");
         resultCreate.setAttribute("id","result");
         document.body.appendChild(resultCreate);
 
@@ -100,14 +152,13 @@ function showDivContent(event) {
         newButton2.setAttribute("id","Menu");
         newButton2.textContent = ("Menu");
         newButton2.addEventListener("click", createMenu);
-
-        let spanTime = document.createElement("span");
-        resultCreate.appendChild(spanTime);
         spanTime.innerHTML = "Final time: " + finalTime + " seconds";
-
-        let spanAccuracy = document.createElement("span");
-        resultCreate.appendChild(spanAccuracy);
-        spanAccuracy.innerHTML = "Accuracy: " + ((correctClick/allClick)*100).toFixed(2) + " %";
+                if(rec){
+        document.querySelectorAll(".spanr").forEach(function(element) {
+        element.classList.add("record");
+        spanAccuracy.style.fontWeight = "bold";
+        });
+        }
     }
 }
 
@@ -115,6 +166,7 @@ function createMenu(){
   currentNumber = 1;
   document.querySelectorAll(".start").forEach(function(element) {
     element.classList.remove("invisible");
+    element.style.filter = 'blur(0px)';
   });
   document.querySelectorAll("#board").forEach(function(element) {
     element.remove();
@@ -122,6 +174,10 @@ function createMenu(){
   document.querySelectorAll("#result").forEach(function(element) {
     element.remove();
   });
+  document.querySelectorAll(".sidebar").forEach(function(element) {
+  element.classList.add("invisible");
+  });
+  rec = false;
 }
 
 function createDivs() {
@@ -138,10 +194,14 @@ function createDivs() {
   document.querySelectorAll(".start").forEach(function(element) {
     element.classList.add("invisible");
   });
+
+
   let arr = Array.apply(null, Array(divCount)).map(function (y, i) { return i+1; });
   arr = arr.sort(function () {
     return Math.random() - 0.5;
   });
+
+  
   arr = arr.sort(function (){
 return Math.random() - 0.5;
 });
@@ -164,7 +224,8 @@ board.appendChild(newDiv);
 
 const {app, BrowserWindow,ipcMain} = require('electron');
 const { after } = require('node:test');
-  const path = require('path')
+  const path = require('path');
+const { stringify } = require('querystring');
   const url = require('url')
   
   function createWindow () {
